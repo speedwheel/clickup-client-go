@@ -57,13 +57,10 @@ type SingleSpace struct {
 			Enabled bool `json:"enabled"`
 		} `json:"tags"`
 		CheckUnresolved struct {
-			Enabled  bool `json:"enabled"`
-			Subtasks struct {
-			} `json:"subtasks"`
-			Checklists struct {
-			} `json:"checklists"`
-			Comments struct {
-			} `json:"comments"`
+			Enabled    bool `json:"enabled"`
+			Subtasks   bool `json:"subtasks"`
+			Checklists bool `json:"checklists"`
+			Comments   bool `json:"comments"`
 		} `json:"check_unresolved"`
 		Zoom struct {
 			Enabled bool `json:"enabled"`

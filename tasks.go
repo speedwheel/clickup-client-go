@@ -446,8 +446,8 @@ func (c *Client) DeleteTask(ctx context.Context, taskID, workspaceID string, use
 }
 
 type CustomFieldInfo struct {
-	val interface{}
-	typ string
+	Val interface{}
+	Typ string
 }
 
 // CustomFieldVal finds the value from a list of arbitrary custome fields and types
@@ -462,19 +462,19 @@ func (t *SingleTask) CustomFieldVal(fieldName string) *CustomFieldInfo {
 
 	for _, field := range t.CustomFields {
 		if field.Name == fieldName {
-			if field.Type == "date" {
+			if field.Type == "date" || field.Type == "short_text" {
 				if field.Value == nil {
-					cf.val = ""
+					cf.Val = ""
 					return &cf
 				}
-				cf.val = field.Value.(string)
-				cf.typ = field.Type
+				cf.Val = field.Value.(string)
+				cf.Typ = field.Type
 				return &cf
 			}
 			for _, v := range field.TypeConfig.Options {
 				if float64(v.Orderindex) == field.Value.(float64) {
-					cf.val = v.Name
-					cf.typ = field.Type
+					cf.Val = v.Name
+					cf.Typ = field.Type
 					break
 				}
 			}
