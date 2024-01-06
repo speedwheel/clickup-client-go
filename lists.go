@@ -24,12 +24,10 @@ type SingleList struct {
 	} `json:"priority"`
 	Assignee struct {
 	} `json:"assignee"`
-	TaskCount int `json:"task_count"`
-	DueDate   struct {
-	} `json:"due_date"`
-	StartDate struct {
-	} `json:"start_date"`
-	Folder struct {
+	TaskCount int    `json:"task_count"`
+	DueDate   string `json:"due_date"`
+	StartDate string `json:"start_date"`
+	Folder    struct {
 		ID     string `json:"id"`
 		Name   string `json:"name"`
 		Hidden bool   `json:"hidden"`
@@ -56,6 +54,22 @@ func (c *Client) ListsForFolder(ctx context.Context, folderID string, includeArc
 	urlValues.Set("archived", strconv.FormatBool(includeArchived))
 
 	endpoint := fmt.Sprintf("/folder/%s/list/?%s", folderID, urlValues.Encode())
+
+	var lists ListsResponse
+
+	if err := c.call(ctx, http.MethodGet, endpoint, nil, &lists); err != nil {
+		return nil, fmt.Errorf("failed to make clickup request: %w", err)
+	}
+
+	return &lists, nil
+}
+
+func (c *Client) ListsForSpace(ctx context.Context, spaceID string, includeArchived bool) (*ListsResponse, error) {
+
+	urlValues := url.Values{}
+	urlValues.Set("archived", strconv.FormatBool(includeArchived))
+
+	endpoint := fmt.Sprintf("/space/%s/list/?%s", spaceID, urlValues.Encode())
 
 	var lists ListsResponse
 

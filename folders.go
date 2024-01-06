@@ -36,12 +36,10 @@ type SingleFolder struct {
 		} `json:"priority"`
 		Assignee struct {
 		} `json:"assignee"`
-		TaskCount int `json:"task_count"`
-		DueDate   struct {
-		} `json:"due_date"`
-		StartDate struct {
-		} `json:"start_date"`
-		Space struct {
+		TaskCount int    `json:"task_count"`
+		DueDate   string `json:"due_date"`
+		StartDate string `json:"start_date"`
+		Space     struct {
 			ID     string `json:"id"`
 			Name   string `json:"name"`
 			Access bool   `json:"access"`
