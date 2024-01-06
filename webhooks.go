@@ -100,7 +100,7 @@ type Webhook struct {
 	Endpoint string         `json:"endpoint"`
 	ClientID string         `json:"client_id"`
 	Events   []WebhookEvent `json:"events"`
-	TaskID   int            `json:"task_id"`
+	TaskID   string         `json:"task_id"`
 	ListID   int            `json:"list_id"`
 	FolderID int            `json:"folder_id"`
 	SpaceID  int            `json:"space_id"`

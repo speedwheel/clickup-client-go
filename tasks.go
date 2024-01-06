@@ -352,14 +352,26 @@ func (c *Client) TaskByID(ctx context.Context, taskID, workspaceID string, useCu
 }
 
 type TaskRequest struct {
-	Name          string   `json:"name"`
-	Description   string   `json:"description,omitempty"`
-	Tags          []string `json:"tags,omitempty"`
-	Status        string   `json:"status,omitempty"`
-	DueDate       int      `json:"due_date,omitempty"`
-	DueDateTime   bool     `json:"due_date_time,omitempty"`
-	StartDate     int      `json:"start_date,omitempty"`
-	StartDateTime bool     `json:"start_date_time,omitempty"`
+	Name                      string            `json:"name"`
+	Description               string            `json:"description,omitempty"`
+	Tags                      []string          `json:"tags,omitempty"`
+	Status                    string            `json:"status,omitempty"`
+	Parent                    string            `json:"parent,omitempty"`
+	DueDate                   int               `json:"due_date,omitempty"`
+	DueDateTime               bool              `json:"due_date_time,omitempty"`
+	StartDate                 int               `json:"start_date,omitempty"`
+	StartDateTime             bool              `json:"start_date_time,omitempty"`
+	CustomFields              []TaskCustomField `json:"custom_fields,omitempty"`
+	Assignees                 []int             `json:"assignees,omitempty"`
+	Priority                  *int              `json:"priority,omitempty"`
+	CheckRequiredCustomFields bool              `json:"check_required_custom_fields,omitempty"`
+	CustomItemID              int               `json:"custom_item_id,omitempty"`
+	TimeEstimates             int               `json:"time_estimate,omitempty"`
+}
+
+type TaskCustomField struct {
+	ID    string `json:"id"`
+	Value string `json:"value"`
 }
 
 // CreateTask inserts a new task into the specified list.
