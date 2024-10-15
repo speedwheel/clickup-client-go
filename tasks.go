@@ -246,6 +246,11 @@ func queryParamsFor(opts *TaskQueryOptions) *url.Values {
 	if opts.DateUpdatedLessThan > 0 {
 		urlValues.Add("date_updated_lt", strconv.Itoa(opts.DateUpdatedLessThan))
 	}
+	if len(opts.Assignees) > 0 {
+		for _, v := range opts.Assignees {
+			urlValues.Add("assignees[]", v)
+		}
+	}
 
 	switch opts.OrderBy {
 	case OrderByID:
