@@ -25,21 +25,22 @@ type Status struct {
 }
 
 type SingleTask struct {
-	ID          string     `json:"id"`
-	CustomID    string     `json:"custom_id"`
-	Name        string     `json:"name"`
-	TextContent string     `json:"text_content"`
-	Description string     `json:"description"`
-	Status      Status     `json:"status"`
-	Orderindex  string     `json:"-"`
-	DateCreated string     `json:"date_created"`
-	DateUpdated string     `json:"date_updated"`
-	DateClosed  string     `json:"date_closed"`
-	Archived    bool       `json:"archived"`
-	Creator     TeamUser   `json:"creator"`
-	Assignees   []TeamUser `json:"assignees"`
-	Watchers    []TeamUser `json:"watchers"`
-	Checklists  []struct {
+	ID                  string     `json:"id"`
+	CustomID            string     `json:"custom_id"`
+	Name                string     `json:"name"`
+	TextContent         string     `json:"text_content"`
+	MarkdownDescription string     `json:"markdown_description"`
+	Description         string     `json:"description"`
+	Status              Status     `json:"status"`
+	Orderindex          string     `json:"-"`
+	DateCreated         string     `json:"date_created"`
+	DateUpdated         string     `json:"date_updated"`
+	DateClosed          string     `json:"date_closed"`
+	Archived            bool       `json:"archived"`
+	Creator             TeamUser   `json:"creator"`
+	Assignees           []TeamUser `json:"assignees"`
+	Watchers            []TeamUser `json:"watchers"`
+	Checklists          []struct {
 		ID          string `json:"id"`
 		TaskID      string `json:"task_id"`
 		Name        string `json:"name"`
@@ -344,6 +345,7 @@ func (c *Client) TaskByID(ctx context.Context, taskID, workspaceID string, useCu
 	urlValues.Set("custom_task_ids", strconv.FormatBool(useCustomTaskIDs))
 	urlValues.Add("include_subtasks", strconv.FormatBool(includeSubtasks))
 	urlValues.Add("team_id", workspaceID)
+	urlValues.Add("include_markdown_description", "true")
 
 	endpoint := fmt.Sprintf("/task/%s/?%s", taskID, urlValues.Encode())
 
