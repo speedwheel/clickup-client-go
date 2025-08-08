@@ -77,7 +77,7 @@ type SingleTask struct {
 	StartDate    string `json:"start_date"`
 	Points       int    `json:"points"`
 	TimeEstimate int    `json:"time_estimate"`
-	TimeSpent    string    `json:"time_spent"`
+	TimeSpent    interface{}    `json:"time_spent"`
 	CustomFields []struct {
 		ID         string `json:"id"`
 		Name       string `json:"name"`
